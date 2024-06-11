@@ -1,0 +1,35 @@
+name: mes_cycles
+description: "Suivre ses cycles"
+publish_to: 'none'
+version: 0.1.0
+
+environment:
+  sdk: '>=3.2.6 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  bloc: ^8.0.0
+  flutter_bloc: ^8.0.0
+  hydrated_bloc: ^9.1.4
+  flutter_launcher_icons: ^0.13.1
+  cupertino_icons: ^1.0.2
+  google_fonts: ^6.2.1
+  path_provider: ^2.1.2
+  url_launcher: ^6.2.6
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+
+flutter:
+  uses-material-design: true
+
+
+#flutter_launcher_icons:
+#  android: "launcher_icon"
+#  image_path: "assets/icon/launcher_icon.png"
+#  min_sdk_android: 21 # android min sdk min:16, default 21
+#  ios: "AppIcon"
+#  remove_alpha_ios: true
