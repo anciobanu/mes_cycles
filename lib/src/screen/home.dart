@@ -31,22 +31,23 @@ class _HomeState extends State<Home> {
       _selectedIndex = index;
     });
     Navigator.pop(context);
-  }
-
+  }  
+  
   Future<void> _addDay() async {
     final Map<DateTime, Journee> nouvelleJournee = await showDialog(
       barrierDismissible: false,
       context: context,
-      builder: (context) => Saisie(),
+      builder: (context) => const Saisie(),
     );
     if(nouvelleJournee.keys.isNotEmpty && _cycle.containsKey(nouvelleJournee.keys.first) && mounted) {
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Journée déjà saisie !')));
     }
     else if(nouvelleJournee.keys.isNotEmpty && !_cycle.containsKey(nouvelleJournee.keys.first)){
       setState(() {
-        _cycle.addEntries(nouvelleJournee.entries);
+        _cycle[nouvelleJournee.keys.first] = nouvelleJournee.values.first;
       });
     }
+    print(_cycle);
   }
 
   @override

@@ -1,12 +1,12 @@
 class Journee {
   const Journee(this.flux, this.transit, this.ballonnements, this.jambesLourdes, this.forme, this.libido, this.stress, this.commentaires);
 
-  final int flux;
-  final int transit;
-  final int ballonnements;
-  final int jambesLourdes;
-  final int forme;
-  final int libido;
-  final int stress;
+  final double flux;
+  final double transit;
+  final double ballonnements;
+  final double jambesLourdes;
+  final double forme;
+  final double libido;
+  final double stress;
   final String ?commentaires;
 }
