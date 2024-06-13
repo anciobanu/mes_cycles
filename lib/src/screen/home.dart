@@ -33,6 +33,22 @@ class _HomeState extends State<Home> {
     Navigator.pop(context);
   }
 
+  Future<void> _addDay() async {
+    final Map<DateTime, Journee> nouvelleJournee = await showDialog(
+      barrierDismissible: false,
+      context: context,
+      builder: (context) => Saisie(),
+    );
+    if(nouvelleJournee.keys.isNotEmpty && _cycle.containsKey(nouvelleJournee.keys.first) && mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Journée déjà saisie !')));
+    }
+    else if(nouvelleJournee.keys.isNotEmpty && !_cycle.containsKey(nouvelleJournee.keys.first)){
+      setState(() {
+        _cycle.addEntries(nouvelleJournee.entries);
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -92,14 +108,9 @@ class _HomeState extends State<Home> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-          onPressed: () {
-          Navigator.of(context).push(
-            PageRouteBuilder(
-              transitionDuration: const Duration(milliseconds: 600),
-              reverseTransitionDuration: const Duration(milliseconds: 400),
-              pageBuilder:(context, animation, secondaryAnimation) => Saisie(date: DateTime.now()),));},
+          onPressed: _addDay,
           shape: const CircleBorder(),
-          child: const Icon(Icons.add,),
+          child: const Icon(Icons.add),
       ),
     );
   }

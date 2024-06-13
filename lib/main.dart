@@ -5,6 +5,7 @@ import 'package:mes_cycles/src/screen/home.dart';
 
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(MesCycles());
 }
 
