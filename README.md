@@ -1,4 +1,3 @@
 # mes_cycles
 
-A new Flutter project.
-# mes_cycles
+Une application mobile pour suivre ses cycles et ses symptômes
