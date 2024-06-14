@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:mes_cycles/src/model/journee.dart';
-//import 'package:mes_cycles/src/widget/saisie_slider.dart';
+import 'package:mes_cycles/src/widget/saisie_slider.dart';
 
 class Saisie extends StatefulWidget {
   const Saisie({super.key});
@@ -17,6 +17,28 @@ class _SaisieState extends State<Saisie> {
   final _commentaires = TextEditingController();
   final Map<DateTime, Journee> result = {};
 
+  void _saveFlux(double nouvelleValeur) {
+    _flux = nouvelleValeur;
+  }
+  void _saveTransit(double nouvelleValeur) {
+    _transit = nouvelleValeur;
+  }
+  void _saveBallonnements(double nouvelleValeur) {
+    _ballonnements = nouvelleValeur;
+  }
+  void _saveJambes(double nouvelleValeur) {
+    _jambes = nouvelleValeur;
+  }
+  void _saveForme(double nouvelleValeur) {
+    _forme = nouvelleValeur;
+  }
+  void _saveLibido(double nouvelleValeur) {
+    _libido = nouvelleValeur;
+  }
+  void _saveStress(double nouvelleValeur) {
+    _stress = nouvelleValeur;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Dialog(
@@ -30,9 +52,9 @@ class _SaisieState extends State<Saisie> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text('Journée du : ',
-                      style: Theme.of(context).textTheme.bodyLarge),
+                      style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.bold)),
                   Text('${date.day}/${date.month}/${date.year}',
-                      style: Theme.of(context).textTheme.bodyLarge),
+                      style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.bold)),
                 ],
               ),
               const Divider(
@@ -47,101 +69,38 @@ class _SaisieState extends State<Saisie> {
                       Text('Flux :',
                           textAlign: TextAlign.left,
                           style: Theme.of(context).textTheme.bodyMedium),
-                      Slider(
-                        value: _flux,
-                        max: 5,
-                        divisions: 5,
-                        label: _flux.round().toString(),
-                        onChanged: (double value) {
-                          setState(() {
-                            _flux = value;
-                          });
-                        },
-                      ),
+                      SaisieSlider(saveValeur: _saveFlux, currentSliderValue: _flux,),
+                      
                       Text('Transit :',
                           textAlign: TextAlign.left,
                           style: Theme.of(context).textTheme.bodyMedium),
-                      Slider(
-                        value: _transit,
-                        max: 5,
-                        divisions: 5,
-                        label: _transit.round().toString(),
-                        onChanged: (double value) {
-                          setState(() {
-                            _transit = value;
-                          });
-                        },
-                      ),
+                      SaisieSlider(saveValeur: _saveTransit, currentSliderValue: _transit,),
+
                       Text('Ballonnements :',
                           textAlign: TextAlign.left,
                           style: Theme.of(context).textTheme.bodyMedium),
-                      Slider(
-                        value: _ballonnements,
-                        max: 5,
-                        divisions: 5,
-                        label: _ballonnements.round().toString(),
-                        onChanged: (double value) {
-                          setState(() {
-                            _ballonnements = value;
-                          });
-                        },
-                      ),
+                      SaisieSlider(saveValeur: _saveBallonnements, currentSliderValue: _ballonnements,),
+
                       Text('Jambes lourdes :',
                           textAlign: TextAlign.left,
                           style: Theme.of(context).textTheme.bodyMedium),
-                      Slider(
-                        value: _jambes,
-                        max: 5,
-                        divisions: 5,
-                        label: _jambes.round().toString(),
-                        onChanged: (double value) {
-                          setState(() {
-                            _jambes = value;
-                          });
-                        },
-                      ),
+                      SaisieSlider(saveValeur: _saveJambes, currentSliderValue: _jambes,),
+
                       Text('Forme :',
                           textAlign: TextAlign.left,
                           style: Theme.of(context).textTheme.bodyMedium),
-                      Slider(
-                        value: _forme,
-                        max: 5,
-                        divisions: 5,
-                        label: _forme.round().toString(),
-                        onChanged: (double value) {
-                          setState(() {
-                            _forme = value;
-                          });
-                        },
-                      ),
+                      SaisieSlider(saveValeur: _saveForme, currentSliderValue: _forme,),
+
                       Text('Libido :',
                           textAlign: TextAlign.left,
                           style: Theme.of(context).textTheme.bodyMedium),
-                      Slider(
-                        value: _libido,
-                        max: 5,
-                        divisions: 5,
-                        label: _libido.round().toString(),
-                        onChanged: (double value) {
-                          setState(() {
-                            _libido = value;
-                          });
-                        },
-                      ),
+                      SaisieSlider(saveValeur: _saveLibido, currentSliderValue: _libido,),
+
                       Text('Stress :',
                           textAlign: TextAlign.left,
                           style: Theme.of(context).textTheme.bodyMedium),
-                      Slider(
-                        value: _stress,
-                        max: 5,
-                        divisions: 5,
-                        label: _stress.round().toString(),
-                        onChanged: (double value) {
-                          setState(() {
-                            _stress = value;
-                          });
-                        },
-                      ),
+                      SaisieSlider(saveValeur: _saveStress, currentSliderValue: _stress,),
+
                       Text('Commentaires :',
                           textAlign: TextAlign.left,
                           style: Theme.of(context).textTheme.bodyMedium),
@@ -168,7 +127,7 @@ class _SaisieState extends State<Saisie> {
                         result[DateTime(date.year, date.month, date.day)] = Journee(_flux, _transit, _ballonnements, _jambes, _forme, _libido, _stress, _commentaires.text);
                         Navigator.pop(context, result);
                       },
-                      child: const Text('OK')),
+                      child: const Text('OK', style: TextStyle(fontWeight: FontWeight.bold),)),
                 ],
               ),
             ],

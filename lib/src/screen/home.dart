@@ -47,7 +47,6 @@ class _HomeState extends State<Home> {
         _cycle[nouvelleJournee.keys.first] = nouvelleJournee.values.first;
       });
     }
-    print(_cycle);
   }
 
   @override
