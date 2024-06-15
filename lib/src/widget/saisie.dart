@@ -1,42 +1,79 @@
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 
 import 'package:mes_cycles/src/model/journee.dart';
 import 'package:mes_cycles/src/widget/saisie_slider.dart';
 
 class Saisie extends StatefulWidget {
-  const Saisie({super.key});
+  const Saisie({super.key, required this.cycles, required this.dateKey});
+
+  final Box<Journee> cycles;
+  final String dateKey;
 
   @override
   State<Saisie> createState() => _SaisieState();
 }
 
 class _SaisieState extends State<Saisie> {
+  late Box<Journee> cycles;
+  late String dateKey;
 
-  final DateTime date = DateTime.now();
-  double _flux = 0, _transit = 0, _ballonnements = 0, _jambes = 0, _forme = 0, _libido = 0, _stress = 0;
   final _commentaires = TextEditingController();
-  final Map<DateTime, Journee> result = {};
+  late DateTime date;
+  late double flux, transit, ballonnements, jambes, forme, libido, stress;
+
+
+  @override
+  void initState() {
+    cycles = widget.cycles;
+    dateKey = widget.dateKey;
+
+    if(cycles.containsKey(dateKey)) {
+      date = cycles.get(dateKey)!.journee;
+      flux = cycles.get(dateKey)!.flux;
+      transit = cycles.get(dateKey)!.transit;
+      ballonnements = cycles.get(dateKey)!.ballonnements;
+      jambes = cycles.get(dateKey)!.jambesLourdes;
+      forme = cycles.get(dateKey)!.forme;
+      libido = cycles.get(dateKey)!.libido;
+      stress = cycles.get(dateKey)!.stress;
+      if (cycles.get(dateKey)!.commentaires != null) {
+        _commentaires.text = cycles.get(dateKey)!.commentaires!;
+      }
+    }
+    else {
+      date = DateTime.now();
+      flux = 0;
+      transit = 0;
+      ballonnements = 0;
+      jambes = 0;
+      forme = 0;
+      libido = 0;
+      stress = 0;
+    }
+    super.initState();
+  }
 
   void _saveFlux(double nouvelleValeur) {
-    _flux = nouvelleValeur;
+    flux = nouvelleValeur;
   }
   void _saveTransit(double nouvelleValeur) {
-    _transit = nouvelleValeur;
+    transit = nouvelleValeur;
   }
   void _saveBallonnements(double nouvelleValeur) {
-    _ballonnements = nouvelleValeur;
+    ballonnements = nouvelleValeur;
   }
   void _saveJambes(double nouvelleValeur) {
-    _jambes = nouvelleValeur;
+    jambes = nouvelleValeur;
   }
   void _saveForme(double nouvelleValeur) {
-    _forme = nouvelleValeur;
+    forme = nouvelleValeur;
   }
   void _saveLibido(double nouvelleValeur) {
-    _libido = nouvelleValeur;
+    libido = nouvelleValeur;
   }
   void _saveStress(double nouvelleValeur) {
-    _stress = nouvelleValeur;
+    stress = nouvelleValeur;
   }
 
   @override
@@ -69,37 +106,37 @@ class _SaisieState extends State<Saisie> {
                       Text('Flux :',
                           textAlign: TextAlign.left,
                           style: Theme.of(context).textTheme.bodyMedium),
-                      SaisieSlider(saveValeur: _saveFlux, currentSliderValue: _flux,),
+                      SaisieSlider(saveValeur: _saveFlux, currentSliderValue: flux,),
                       
                       Text('Transit :',
                           textAlign: TextAlign.left,
                           style: Theme.of(context).textTheme.bodyMedium),
-                      SaisieSlider(saveValeur: _saveTransit, currentSliderValue: _transit,),
+                      SaisieSlider(saveValeur: _saveTransit, currentSliderValue: transit,),
 
                       Text('Ballonnements :',
                           textAlign: TextAlign.left,
                           style: Theme.of(context).textTheme.bodyMedium),
-                      SaisieSlider(saveValeur: _saveBallonnements, currentSliderValue: _ballonnements,),
+                      SaisieSlider(saveValeur: _saveBallonnements, currentSliderValue: ballonnements,),
 
                       Text('Jambes lourdes :',
                           textAlign: TextAlign.left,
                           style: Theme.of(context).textTheme.bodyMedium),
-                      SaisieSlider(saveValeur: _saveJambes, currentSliderValue: _jambes,),
+                      SaisieSlider(saveValeur: _saveJambes, currentSliderValue: jambes,),
 
                       Text('Forme :',
                           textAlign: TextAlign.left,
                           style: Theme.of(context).textTheme.bodyMedium),
-                      SaisieSlider(saveValeur: _saveForme, currentSliderValue: _forme,),
+                      SaisieSlider(saveValeur: _saveForme, currentSliderValue: forme,),
 
                       Text('Libido :',
                           textAlign: TextAlign.left,
                           style: Theme.of(context).textTheme.bodyMedium),
-                      SaisieSlider(saveValeur: _saveLibido, currentSliderValue: _libido,),
+                      SaisieSlider(saveValeur: _saveLibido, currentSliderValue: libido,),
 
                       Text('Stress :',
                           textAlign: TextAlign.left,
                           style: Theme.of(context).textTheme.bodyMedium),
-                      SaisieSlider(saveValeur: _saveStress, currentSliderValue: _stress,),
+                      SaisieSlider(saveValeur: _saveStress, currentSliderValue: stress,),
 
                       Text('Commentaires :',
                           textAlign: TextAlign.left,
@@ -120,12 +157,12 @@ class _SaisieState extends State<Saisie> {
                 children: [
                   TextButton(
                       onPressed: () =>
-                          Navigator.pop(context, <DateTime, Journee>{}),
+                          Navigator.pop(context, null),
                       child: const Text('Annuler')),
                   ElevatedButton(
                       onPressed: () {
-                        result[DateTime(date.year, date.month, date.day)] = Journee(_flux, _transit, _ballonnements, _jambes, _forme, _libido, _stress, _commentaires.text);
-                        Navigator.pop(context, result);
+                        cycles.put(DateTime(date.year, date.month, date.day).toString(), Journee(DateTime(date.year, date.month, date.day), flux, transit, ballonnements, jambes, forme, libido, stress, _commentaires.text));
+                        Navigator.pop(context);
                       },
                       child: const Text('OK', style: TextStyle(fontWeight: FontWeight.bold),)),
                 ],

@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:mes_cycles/src/model/journee.dart';
+
 import 'package:mes_cycles/src/screen/home.dart';
 
 
+void main() async{
+  await Hive.initFlutter();
+  Hive.registerAdapter(JourneeAdapter());
+  await Hive.openBox<Journee>('Mes Cycles');
 
-void main() {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(MesCycles());
 }

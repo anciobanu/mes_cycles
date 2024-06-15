@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 
 import 'package:mes_cycles/src/model/journee.dart';
 import 'package:mes_cycles/src/widget/calendar.dart';
@@ -13,12 +14,13 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  final Map<DateTime,Journee> _cycle = {};
+
+  final Box<Journee> cycles = Hive.box('Mes Cycles');
 
   int _selectedIndex = 0;
-  static const List<Widget> _bodys = <Widget>[
-    Calendar(),
-    Stats(),
+  late final List<Widget> _bodys = <Widget>[
+    Calendar(cycles: cycles),
+    Stats(cycles: cycles),
   ];
 
   static const List<String> _titles = <String>[
@@ -33,20 +35,15 @@ class _HomeState extends State<Home> {
     Navigator.pop(context);
   }  
   
-  Future<void> _addDay() async {
-    final Map<DateTime, Journee> nouvelleJournee = await showDialog(
+  Future<void> _addToday() async {
+    showDialog(
       barrierDismissible: false,
       context: context,
-      builder: (context) => const Saisie(),
+      builder: (context) => Saisie(cycles: cycles, dateKey: DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day).toString()),
     );
-    if(nouvelleJournee.keys.isNotEmpty && _cycle.containsKey(nouvelleJournee.keys.first) && mounted) {
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Journée déjà saisie !')));
-    }
-    else if(nouvelleJournee.keys.isNotEmpty && !_cycle.containsKey(nouvelleJournee.keys.first)){
-      setState(() {
-        _cycle[nouvelleJournee.keys.first] = nouvelleJournee.values.first;
-      });
-    }
+    setState(() {
+      _selectedIndex = _selectedIndex;
+    });
   }
 
   @override
@@ -108,7 +105,7 @@ class _HomeState extends State<Home> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-          onPressed: _addDay,
+          onPressed: _addToday,
           shape: const CircleBorder(),
           child: const Icon(Icons.add),
       ),
