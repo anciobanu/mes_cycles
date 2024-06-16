@@ -89,9 +89,9 @@ class _SaisieState extends State<Saisie> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text('Journée du : ',
-                      style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.bold)),
+                      style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.bold, color: Theme.of(context).colorScheme.outline)),
                   Text('${date.day}/${date.month}/${date.year}',
-                      style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.bold)),
+                      style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.bold, color: Theme.of(context).colorScheme.outline)),
                 ],
               ),
               const Divider(
@@ -105,45 +105,46 @@ class _SaisieState extends State<Saisie> {
                     children: [
                       Text('Flux :',
                           textAlign: TextAlign.left,
-                          style: Theme.of(context).textTheme.bodyMedium),
+                          style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: Theme.of(context).colorScheme.outline)),
                       SaisieSlider(saveValeur: _saveFlux, currentSliderValue: flux,),
                       
                       Text('Transit :',
                           textAlign: TextAlign.left,
-                          style: Theme.of(context).textTheme.bodyMedium),
+                          style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: Theme.of(context).colorScheme.outline)),
                       SaisieSlider(saveValeur: _saveTransit, currentSliderValue: transit,),
 
                       Text('Ballonnements :',
                           textAlign: TextAlign.left,
-                          style: Theme.of(context).textTheme.bodyMedium),
+                          style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: Theme.of(context).colorScheme.outline)),
                       SaisieSlider(saveValeur: _saveBallonnements, currentSliderValue: ballonnements,),
 
                       Text('Jambes lourdes :',
                           textAlign: TextAlign.left,
-                          style: Theme.of(context).textTheme.bodyMedium),
+                          style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: Theme.of(context).colorScheme.outline)),
                       SaisieSlider(saveValeur: _saveJambes, currentSliderValue: jambes,),
 
                       Text('Forme :',
                           textAlign: TextAlign.left,
-                          style: Theme.of(context).textTheme.bodyMedium),
+                          style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: Theme.of(context).colorScheme.outline)),
                       SaisieSlider(saveValeur: _saveForme, currentSliderValue: forme,),
 
                       Text('Libido :',
                           textAlign: TextAlign.left,
-                          style: Theme.of(context).textTheme.bodyMedium),
+                          style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: Theme.of(context).colorScheme.outline)),
                       SaisieSlider(saveValeur: _saveLibido, currentSliderValue: libido,),
 
                       Text('Stress :',
                           textAlign: TextAlign.left,
-                          style: Theme.of(context).textTheme.bodyMedium),
+                          style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: Theme.of(context).colorScheme.outline)),
                       SaisieSlider(saveValeur: _saveStress, currentSliderValue: stress,),
 
                       Text('Commentaires :',
                           textAlign: TextAlign.left,
-                          style: Theme.of(context).textTheme.bodyMedium),
+                          style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: Theme.of(context).colorScheme.outline)),
                       TextField(
                         controller: _commentaires,
                         keyboardType: TextInputType.text,
+                        style: TextStyle(color: Theme.of(context).colorScheme.outline),
                       ),
                     ],
                   ),

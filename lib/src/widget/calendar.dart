@@ -38,7 +38,7 @@ class Calendar extends StatelessWidget {
                             child: Card(
                                 child: Center(
                                     child: Text('${cycles.getAt(index)!.journee.day}/${cycles.getAt(index)!.journee.month}/${cycles.getAt(index)!.journee.year}',
-                              style: Theme.of(context).textTheme.bodyMedium,
+                              style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: Theme.of(context).colorScheme.outline),
                             ))),
                           ),
                         ),
