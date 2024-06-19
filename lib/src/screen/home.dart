@@ -39,7 +39,7 @@ class _HomeState extends State<Home> {
     showDialog(
       barrierDismissible: false,
       context: context,
-      builder: (context) => Saisie(cycles: cycles, dateKey: DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day).toString()),
+      builder: (context) => Saisie(cycles: cycles, selectedDate: DateTime.now()),
     );
     setState(() {
       _selectedIndex = _selectedIndex;

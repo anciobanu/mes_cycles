@@ -18,39 +18,42 @@ class JourneeAdapter extends TypeAdapter<Journee> {
     };
     return Journee(
       fields[0] as DateTime,
-      fields[1] as double,
+      fields[1] as String?,
       fields[2] as double,
       fields[3] as double,
       fields[4] as double,
       fields[5] as double,
       fields[6] as double,
       fields[7] as double,
-      fields[8] as String?,
+      fields[8] as double,
+      fields[9] as double,
     );
   }
 
   @override
   void write(BinaryWriter writer, Journee obj) {
     writer
-      ..writeByte(9)
+      ..writeByte(10)
       ..writeByte(0)
       ..write(obj.journee)
       ..writeByte(1)
-      ..write(obj.flux)
+      ..write(obj.commentaires)
       ..writeByte(2)
-      ..write(obj.transit)
+      ..write(obj.flux)
       ..writeByte(3)
-      ..write(obj.ballonnements)
+      ..write(obj.transit)
       ..writeByte(4)
-      ..write(obj.jambesLourdes)
+      ..write(obj.ballonnements)
       ..writeByte(5)
-      ..write(obj.forme)
+      ..write(obj.douleurs)
       ..writeByte(6)
-      ..write(obj.libido)
+      ..write(obj.jambesLourdes)
       ..writeByte(7)
-      ..write(obj.stress)
+      ..write(obj.forme)
       ..writeByte(8)
-      ..write(obj.commentaires);
+      ..write(obj.libido)
+      ..writeByte(9)
+      ..write(obj.stress);
   }
 
   @override

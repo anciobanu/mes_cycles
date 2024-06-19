@@ -5,10 +5,10 @@ import 'package:mes_cycles/src/model/journee.dart';
 import 'package:mes_cycles/src/widget/saisie_slider.dart';
 
 class Saisie extends StatefulWidget {
-  const Saisie({super.key, required this.cycles, required this.dateKey});
+  const Saisie({super.key, required this.cycles, required this.selectedDate});
 
   final Box<Journee> cycles;
-  final String dateKey;
+  final DateTime selectedDate;
 
   @override
   State<Saisie> createState() => _SaisieState();
@@ -16,23 +16,24 @@ class Saisie extends StatefulWidget {
 
 class _SaisieState extends State<Saisie> {
   late Box<Journee> cycles;
+  late DateTime selectedDate;
   late String dateKey;
 
   final _commentaires = TextEditingController();
-  late DateTime date;
-  late double flux, transit, ballonnements, jambes, forme, libido, stress;
+  late double flux, transit, ballonnements, douleurs, jambes, forme, libido, stress;
 
 
   @override
   void initState() {
     cycles = widget.cycles;
-    dateKey = widget.dateKey;
+    selectedDate = widget.selectedDate;
+    dateKey = DateTime(selectedDate.year,selectedDate.month,selectedDate.day).toString();
 
-    if(cycles.containsKey(dateKey)) {
-      date = cycles.get(dateKey)!.journee;
+    if (cycles.containsKey(dateKey)) {
       flux = cycles.get(dateKey)!.flux;
       transit = cycles.get(dateKey)!.transit;
       ballonnements = cycles.get(dateKey)!.ballonnements;
+      douleurs = cycles.get(dateKey)!.douleurs;
       jambes = cycles.get(dateKey)!.jambesLourdes;
       forme = cycles.get(dateKey)!.forme;
       libido = cycles.get(dateKey)!.libido;
@@ -40,12 +41,11 @@ class _SaisieState extends State<Saisie> {
       if (cycles.get(dateKey)!.commentaires != null) {
         _commentaires.text = cycles.get(dateKey)!.commentaires!;
       }
-    }
-    else {
-      date = DateTime.now();
+    } else {
       flux = 0;
       transit = 0;
       ballonnements = 0;
+      douleurs = 0;
       jambes = 0;
       forme = 0;
       libido = 0;
@@ -63,6 +63,9 @@ class _SaisieState extends State<Saisie> {
   void _saveBallonnements(double nouvelleValeur) {
     ballonnements = nouvelleValeur;
   }
+  void _saveDouleurs(double nouvelleValeur) {
+    douleurs = nouvelleValeur;
+  }
   void _saveJambes(double nouvelleValeur) {
     jambes = nouvelleValeur;
   }
@@ -79,6 +82,8 @@ class _SaisieState extends State<Saisie> {
   @override
   Widget build(BuildContext context) {
     return Dialog(
+      backgroundColor: Theme.of(context).colorScheme.background,
+      surfaceTintColor: Theme.of(context).colorScheme.background,
       child: Padding(
           padding: const EdgeInsets.all(16),
           child: Column(
@@ -89,9 +94,13 @@ class _SaisieState extends State<Saisie> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text('Journée du : ',
-                      style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.bold, color: Theme.of(context).colorScheme.outline)),
-                  Text('${date.day}/${date.month}/${date.year}',
-                      style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.bold, color: Theme.of(context).colorScheme.outline)),
+                      style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                          fontWeight: FontWeight.bold,
+                          color: Theme.of(context).colorScheme.outline)),
+                  Text('${selectedDate.day}/${selectedDate.month}/${selectedDate.year}',
+                      style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                          fontWeight: FontWeight.bold,
+                          color: Theme.of(context).colorScheme.outline)),
                 ],
               ),
               const Divider(
@@ -117,6 +126,11 @@ class _SaisieState extends State<Saisie> {
                           textAlign: TextAlign.left,
                           style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: Theme.of(context).colorScheme.outline)),
                       SaisieSlider(saveValeur: _saveBallonnements, currentSliderValue: ballonnements,),
+
+                      Text('Douleurs :',
+                          textAlign: TextAlign.left,
+                          style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: Theme.of(context).colorScheme.outline)),
+                      SaisieSlider(saveValeur: _saveDouleurs, currentSliderValue: douleurs,),
 
                       Text('Jambes lourdes :',
                           textAlign: TextAlign.left,
@@ -159,13 +173,13 @@ class _SaisieState extends State<Saisie> {
                   TextButton(
                       onPressed: () =>
                           Navigator.pop(context, null),
-                      child: const Text('Annuler')),
+                      child: Text('Annuler', style: TextStyle(color: Theme.of(context).colorScheme.onSecondaryContainer),)),
                   ElevatedButton(
                       onPressed: () {
-                        cycles.put(DateTime(date.year, date.month, date.day).toString(), Journee(DateTime(date.year, date.month, date.day), flux, transit, ballonnements, jambes, forme, libido, stress, _commentaires.text));
+                        cycles.put(DateTime(selectedDate.year, selectedDate.month, selectedDate.day).toString(), Journee(DateTime(selectedDate.year, selectedDate.month, selectedDate.day), _commentaires.text, flux, transit, ballonnements, douleurs, jambes, forme, libido, stress));
                         Navigator.pop(context);
                       },
-                      child: const Text('OK', style: TextStyle(fontWeight: FontWeight.bold),)),
+                      child: Text('OK', style: TextStyle(fontWeight: FontWeight.bold, color: Theme.of(context).colorScheme.onSecondaryContainer),)),
                 ],
               ),
             ],

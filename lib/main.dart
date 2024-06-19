@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:mes_cycles/src/model/journee.dart';
-
 import 'package:mes_cycles/src/screen/home.dart';
 
 
@@ -104,6 +104,14 @@ class MesCycles extends StatelessWidget {
       ),
       themeMode: ThemeMode.system,
       title: 'Mes Cycles',
+      localizationsDelegates: const [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+        ],
+      supportedLocales: const [
+        Locale('fr'),
+        ],
       home: const Home(),
     );
   }
