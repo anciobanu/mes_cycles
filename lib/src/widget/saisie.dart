@@ -81,9 +81,9 @@ class _SaisieState extends State<Saisie> {
 
   @override
   Widget build(BuildContext context) {
-    return Dialog(
+    return Dialog.fullscreen(
       backgroundColor: Theme.of(context).colorScheme.background,
-      surfaceTintColor: Theme.of(context).colorScheme.background,
+      //surfaceTintColor: Theme.of(context).colorScheme.background,
       child: Padding(
           padding: const EdgeInsets.all(16),
           child: Column(
@@ -112,42 +112,42 @@ class _SaisieState extends State<Saisie> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      Text('Flux :',
+                      Text('Flux (0 RAS) :',
                           textAlign: TextAlign.left,
                           style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: Theme.of(context).colorScheme.outline)),
                       SaisieSlider(saveValeur: _saveFlux, currentSliderValue: flux,),
                       
-                      Text('Transit :',
+                      Text('Transit (1 diarrhée - 5 constipation) :',
                           textAlign: TextAlign.left,
                           style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: Theme.of(context).colorScheme.outline)),
                       SaisieSlider(saveValeur: _saveTransit, currentSliderValue: transit,),
 
-                      Text('Ballonnements :',
+                      Text('Ballonnements (1 faibles - 5 fréquents) :',
                           textAlign: TextAlign.left,
                           style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: Theme.of(context).colorScheme.outline)),
                       SaisieSlider(saveValeur: _saveBallonnements, currentSliderValue: ballonnements,),
 
-                      Text('Douleurs :',
+                      Text('Douleurs (1 faibles - 5 fortes) :',
                           textAlign: TextAlign.left,
                           style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: Theme.of(context).colorScheme.outline)),
                       SaisieSlider(saveValeur: _saveDouleurs, currentSliderValue: douleurs,),
 
-                      Text('Jambes lourdes :',
+                      Text('Jambes lourdes (1 faible - 5 fort) :',
                           textAlign: TextAlign.left,
                           style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: Theme.of(context).colorScheme.outline)),
                       SaisieSlider(saveValeur: _saveJambes, currentSliderValue: jambes,),
 
-                      Text('Forme :',
+                      Text('Forme (1 fatigue - 5 la pêche) :',
                           textAlign: TextAlign.left,
                           style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: Theme.of(context).colorScheme.outline)),
                       SaisieSlider(saveValeur: _saveForme, currentSliderValue: forme,),
 
-                      Text('Libido :',
+                      Text('Libido (1 none - 5 fatale) :',
                           textAlign: TextAlign.left,
                           style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: Theme.of(context).colorScheme.outline)),
                       SaisieSlider(saveValeur: _saveLibido, currentSliderValue: libido,),
 
-                      Text('Stress :',
+                      Text('Stress (1 Doc Gynéco - 5 Frodon) :',
                           textAlign: TextAlign.left,
                           style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: Theme.of(context).colorScheme.outline)),
                       SaisieSlider(saveValeur: _saveStress, currentSliderValue: stress,),

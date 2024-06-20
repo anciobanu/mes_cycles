@@ -23,14 +23,14 @@ class _CalendarState extends State<Calendar> {
     daySelected = DateTime.now();
     super.initState();
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder<Box>(
         valueListenable: widget.cycles.listenable(),
         builder: (context, box, widget) {
           return Padding(
-              padding: const EdgeInsets.all(16),
+              padding: const EdgeInsets.fromLTRB(16,16,16,80),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -39,16 +39,15 @@ class _CalendarState extends State<Calendar> {
                     locale: 'fr_FR',
                     daysOfWeekHeight: 22,
                     focusedDay: daySelected,
-                    firstDay:
-                        DateTime.utc(2024,1,1),
+                    firstDay: DateTime.utc(2024, 1, 1),
                     lastDay: DateTime.now(),
-                    currentDay: daySelected,//DateTime.now(),
+                    currentDay: daySelected, //DateTime.now(),
                     calendarFormat: CalendarFormat.month,
                     startingDayOfWeek: StartingDayOfWeek.monday,
                     headerStyle: HeaderStyle(
                       formatButtonVisible: false,
                       titleCentered: true,
-                      titleTextStyle: Theme.of(context).textTheme.bodyLarge!.copyWith(color: Theme.of(context).colorScheme.onBackground),
+                      titleTextStyle: Theme.of(context).textTheme.bodyLarge!.copyWith(color:Theme.of(context).colorScheme.onBackground),
                     ),
                     calendarStyle: CalendarStyle(
                       rangeHighlightColor: Theme.of(context).colorScheme.onBackground,
@@ -56,63 +55,188 @@ class _CalendarState extends State<Calendar> {
                       todayDecoration: BoxDecoration(color: Theme.of(context).colorScheme.secondaryContainer, shape: BoxShape.circle),
                       selectedTextStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(color: Theme.of(context).colorScheme.onSecondaryContainer),
                       selectedDecoration: BoxDecoration(color: Theme.of(context).colorScheme.secondaryContainer, shape: BoxShape.circle),
-                      weekendTextStyle : Theme.of(context).textTheme.bodyMedium!.copyWith(color: Theme.of(context).colorScheme.onBackground),
+                      weekendTextStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(color: Theme.of(context).colorScheme.onBackground),
                       defaultTextStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(color: Theme.of(context).colorScheme.onBackground),
-
                     ),
-                    daysOfWeekStyle: DaysOfWeekStyle(
-                      weekdayStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(color: Theme.of(context).colorScheme.onBackground),
+                    daysOfWeekStyle: DaysOfWeekStyle(weekdayStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(color: Theme.of(context).colorScheme.onBackground),
                       weekendStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(color: Theme.of(context).colorScheme.onBackground),
                     ),
                     onDaySelected: (selectedDay, focusedDay) {
                       setState(() {
                         daySelected = selectedDay;
                       });
-                      showDialog(
-                        barrierDismissible: false,
-                        context: context,
-                        builder: (context) => Saisie(
-                            cycles: _cycles, selectedDate: selectedDay),
-                      );
                     },
                   ),
-
-                ],
-              )
-              
-              
-              
-              
-              /*ListView.separated(
-                  itemCount: cycles.length,
-                  separatorBuilder: (context, index) {
-                    return const SizedBox(
-                      height: 1,
-                    );
-                  },
-                  itemBuilder: (context, index) {
-                    return Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                  const SizedBox(height: 16,),
+                  Expanded(
+                      child: Card(
+                          child: Padding(
+                    padding: const EdgeInsets.all(4),
+                    child: Column(
+                      //mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         Expanded(
-                          child: InkWell(
-                            onTap: () {
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              Column(
+                                children: [
+                                  Text(
+                                    'Etat de forme : ',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodyMedium!
+                                        .copyWith(
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .onSecondaryContainer,
+                                            fontWeight: FontWeight.bold),
+                                  ),
+                                  Text(
+                                    _cycles.get(DateTime(daySelected.year, daySelected.month, daySelected.day).toString()) == null ? 'Flux' : 'Flux ${_cycles.get(DateTime(daySelected.year, daySelected.month, daySelected.day).toString())!.flux} /5',
+                                    textAlign: TextAlign.left,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodyMedium!
+                                        .copyWith(
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .onSecondaryContainer,
+                                        ),
+                                  ),
+                                  Text(
+                                    _cycles.get(DateTime(daySelected.year, daySelected.month, daySelected.day).toString()) == null ? 'Forme' : 'Forme ${_cycles.get(DateTime(daySelected.year, daySelected.month, daySelected.day).toString())!.forme} /5',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodyMedium!
+                                        .copyWith(
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .onSecondaryContainer,
+                                        ),
+                                  ),
+                                  Text(
+                                    _cycles.get(DateTime(daySelected.year, daySelected.month, daySelected.day).toString()) == null ? 'Stress' : 'Stress ${_cycles.get(DateTime(daySelected.year, daySelected.month, daySelected.day).toString())!.stress} /5',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodyMedium!
+                                        .copyWith(
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .onSecondaryContainer,
+                                        ),
+                                  ),
+                                ],
+                              ),
+                              VerticalDivider(
+                                  thickness: 1,
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .onSecondaryContainer),
+                              Column(
+                                children: [
+                                  Text(
+                                    'Symptômes :',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodyMedium!
+                                        .copyWith(
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .onSecondaryContainer,
+                                            fontWeight: FontWeight.bold),
+                                  ),
+                                  Text(
+                                    _cycles.get(DateTime(daySelected.year, daySelected.month, daySelected.day).toString()) == null ? 'Transit' : 'Transit ${_cycles.get(DateTime(daySelected.year, daySelected.month, daySelected.day).toString())!.transit} /5',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodyMedium!
+                                        .copyWith(
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .onSecondaryContainer,
+                                        ),
+                                  ),
+                                  Text(
+                                    _cycles.get(DateTime(daySelected.year, daySelected.month, daySelected.day).toString()) == null ? 'Ballonnements' : 'Ballonnements ${_cycles.get(DateTime(daySelected.year, daySelected.month, daySelected.day).toString())!.ballonnements} /5',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodyMedium!
+                                        .copyWith(
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .onSecondaryContainer,
+                                        ),
+                                  ),
+                                  Text(
+                                    _cycles.get(DateTime(daySelected.year, daySelected.month, daySelected.day).toString()) == null ? 'Douleurs' : 'Douleurs ${_cycles.get(DateTime(daySelected.year, daySelected.month, daySelected.day).toString())!.douleurs} /5',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodyMedium!
+                                        .copyWith(
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .onSecondaryContainer,
+                                        ),
+                                  ),
+                                  Text(
+                                    _cycles.get(DateTime(daySelected.year, daySelected.month, daySelected.day).toString()) == null ? 'Jambes lourdes' : 'Jambes lourdes ${_cycles.get(DateTime(daySelected.year, daySelected.month, daySelected.day).toString())!.jambesLourdes} /5',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodyMedium!
+                                        .copyWith(
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .onSecondaryContainer,
+                                        ),
+                                  ),
+                                  Text(
+                                    _cycles.get(DateTime(daySelected.year, daySelected.month, daySelected.day).toString()) == null ? 'Libido' : 'Libido ${_cycles.get(DateTime(daySelected.year, daySelected.month, daySelected.day).toString())!.libido} /5',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodyMedium!
+                                        .copyWith(
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .onSecondaryContainer,
+                                        ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(height: 16),
+                        Center(
+                          child: OutlinedButton.icon(
+                            label: Text('Modifier',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyMedium!
+                                    .copyWith(
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .onSecondaryContainer,
+                                        fontWeight: FontWeight.bold)),
+                            icon: Icon(Icons.edit,
+                                color: Theme.of(context)
+                                    .colorScheme
+                                    .onSecondaryContainer),
+                            onPressed: () {
                               showDialog(
                                 barrierDismissible: false,
                                 context: context,
-                                builder: (context) => Saisie(cycles: cycles, dateKey: cycles.keyAt(index)),
+                                builder: (context) => Saisie(
+                                    cycles: _cycles, selectedDate: daySelected),
                               );
                             },
-                            child: Card(
-                                child: Center(
-                                    child: Text('${cycles.getAt(index)!.journee.day}/${cycles.getAt(index)!.journee.month}/${cycles.getAt(index)!.journee.year}',
-                              style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: Theme.of(context).colorScheme.outline),
-                            ))),
                           ),
                         ),
                       ],
-                    );
-                  })*/);
+                    ),
+                  )))
+                ],
+              ));
         });
   }
 }
