@@ -79,129 +79,139 @@ class _CalendarState extends State<Calendar> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
-                              Column(
-                                children: [
-                                  Text(
-                                    'Etat de forme : ',
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodyMedium!
-                                        .copyWith(
+                              Expanded(
+                                flex: 2,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Etat de forme : ',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyMedium!
+                                          .copyWith(
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .onSecondaryContainer,
+                                              fontWeight: FontWeight.bold),
+                                              textAlign: TextAlign.center,
+                                    ),
+                                    Text(
+                                      _cycles.get(DateTime(daySelected.year, daySelected.month, daySelected.day).toString()) == null ? 'Flux' : '${_cycles.get(DateTime(daySelected.year, daySelected.month, daySelected.day).toString())!.flux.toInt()}/5 Flux',
+                                      textAlign: TextAlign.left,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyMedium!
+                                          .copyWith(
                                             color: Theme.of(context)
                                                 .colorScheme
                                                 .onSecondaryContainer,
-                                            fontWeight: FontWeight.bold),
-                                  ),
-                                  Text(
-                                    _cycles.get(DateTime(daySelected.year, daySelected.month, daySelected.day).toString()) == null ? 'Flux' : 'Flux ${_cycles.get(DateTime(daySelected.year, daySelected.month, daySelected.day).toString())!.flux} /5',
-                                    textAlign: TextAlign.left,
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodyMedium!
-                                        .copyWith(
-                                          color: Theme.of(context)
-                                              .colorScheme
-                                              .onSecondaryContainer,
-                                        ),
-                                  ),
-                                  Text(
-                                    _cycles.get(DateTime(daySelected.year, daySelected.month, daySelected.day).toString()) == null ? 'Forme' : 'Forme ${_cycles.get(DateTime(daySelected.year, daySelected.month, daySelected.day).toString())!.forme} /5',
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodyMedium!
-                                        .copyWith(
-                                          color: Theme.of(context)
-                                              .colorScheme
-                                              .onSecondaryContainer,
-                                        ),
-                                  ),
-                                  Text(
-                                    _cycles.get(DateTime(daySelected.year, daySelected.month, daySelected.day).toString()) == null ? 'Stress' : 'Stress ${_cycles.get(DateTime(daySelected.year, daySelected.month, daySelected.day).toString())!.stress} /5',
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodyMedium!
-                                        .copyWith(
-                                          color: Theme.of(context)
-                                              .colorScheme
-                                              .onSecondaryContainer,
-                                        ),
-                                  ),
-                                ],
+                                          ),
+                                    ),
+                                    Text(
+                                      _cycles.get(DateTime(daySelected.year, daySelected.month, daySelected.day).toString()) == null ? 'Forme' : '${_cycles.get(DateTime(daySelected.year, daySelected.month, daySelected.day).toString())!.forme.toInt()}/5 Forme',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyMedium!
+                                          .copyWith(
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .onSecondaryContainer,
+                                          ),
+                                    ),
+                                    Text(
+                                      _cycles.get(DateTime(daySelected.year, daySelected.month, daySelected.day).toString()) == null ? 'Stress' : '${_cycles.get(DateTime(daySelected.year, daySelected.month, daySelected.day).toString())!.stress.toInt()}/5 Stress',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyMedium!
+                                          .copyWith(
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .onSecondaryContainer,
+                                          ),
+                                    ),
+                                  ],
+                                ),
                               ),
                               VerticalDivider(
                                   thickness: 1,
                                   color: Theme.of(context)
                                       .colorScheme
                                       .onSecondaryContainer),
-                              Column(
-                                children: [
-                                  Text(
-                                    'Symptômes :',
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodyMedium!
-                                        .copyWith(
+                              Expanded(
+                                flex: 3,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Symptômes :',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyMedium!
+                                          .copyWith(
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .onSecondaryContainer,
+                                              fontWeight: FontWeight.bold),
+                                        textAlign: TextAlign.center,
+                                    ),
+                                    Text(
+                                      _cycles.get(DateTime(daySelected.year, daySelected.month, daySelected.day).toString()) == null ? 'Transit' : '${_cycles.get(DateTime(daySelected.year, daySelected.month, daySelected.day).toString())!.transit.toInt()}/5 Transit',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyMedium!
+                                          .copyWith(
                                             color: Theme.of(context)
                                                 .colorScheme
                                                 .onSecondaryContainer,
-                                            fontWeight: FontWeight.bold),
-                                  ),
-                                  Text(
-                                    _cycles.get(DateTime(daySelected.year, daySelected.month, daySelected.day).toString()) == null ? 'Transit' : 'Transit ${_cycles.get(DateTime(daySelected.year, daySelected.month, daySelected.day).toString())!.transit} /5',
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodyMedium!
-                                        .copyWith(
-                                          color: Theme.of(context)
-                                              .colorScheme
-                                              .onSecondaryContainer,
-                                        ),
-                                  ),
-                                  Text(
-                                    _cycles.get(DateTime(daySelected.year, daySelected.month, daySelected.day).toString()) == null ? 'Ballonnements' : 'Ballonnements ${_cycles.get(DateTime(daySelected.year, daySelected.month, daySelected.day).toString())!.ballonnements} /5',
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodyMedium!
-                                        .copyWith(
-                                          color: Theme.of(context)
-                                              .colorScheme
-                                              .onSecondaryContainer,
-                                        ),
-                                  ),
-                                  Text(
-                                    _cycles.get(DateTime(daySelected.year, daySelected.month, daySelected.day).toString()) == null ? 'Douleurs' : 'Douleurs ${_cycles.get(DateTime(daySelected.year, daySelected.month, daySelected.day).toString())!.douleurs} /5',
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodyMedium!
-                                        .copyWith(
-                                          color: Theme.of(context)
-                                              .colorScheme
-                                              .onSecondaryContainer,
-                                        ),
-                                  ),
-                                  Text(
-                                    _cycles.get(DateTime(daySelected.year, daySelected.month, daySelected.day).toString()) == null ? 'Jambes lourdes' : 'Jambes lourdes ${_cycles.get(DateTime(daySelected.year, daySelected.month, daySelected.day).toString())!.jambesLourdes} /5',
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodyMedium!
-                                        .copyWith(
-                                          color: Theme.of(context)
-                                              .colorScheme
-                                              .onSecondaryContainer,
-                                        ),
-                                  ),
-                                  Text(
-                                    _cycles.get(DateTime(daySelected.year, daySelected.month, daySelected.day).toString()) == null ? 'Libido' : 'Libido ${_cycles.get(DateTime(daySelected.year, daySelected.month, daySelected.day).toString())!.libido} /5',
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodyMedium!
-                                        .copyWith(
-                                          color: Theme.of(context)
-                                              .colorScheme
-                                              .onSecondaryContainer,
-                                        ),
-                                  ),
-                                ],
+                                          ),
+                                    ),
+                                    Text(
+                                      _cycles.get(DateTime(daySelected.year, daySelected.month, daySelected.day).toString()) == null ? 'Ballonnements' : '${_cycles.get(DateTime(daySelected.year, daySelected.month, daySelected.day).toString())!.ballonnements.toInt()}/5 Ballonnements',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyMedium!
+                                          .copyWith(
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .onSecondaryContainer,
+                                          ),
+                                    ),
+                                    Text(
+                                      _cycles.get(DateTime(daySelected.year, daySelected.month, daySelected.day).toString()) == null ? 'Douleurs' : '${_cycles.get(DateTime(daySelected.year, daySelected.month, daySelected.day).toString())!.douleurs.toInt()}/5 Douleurs',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyMedium!
+                                          .copyWith(
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .onSecondaryContainer,
+                                          ),
+                                    ),
+                                    Text(
+                                      _cycles.get(DateTime(daySelected.year, daySelected.month, daySelected.day).toString()) == null ? 'Jambes lourdes' : '${_cycles.get(DateTime(daySelected.year, daySelected.month, daySelected.day).toString())!.jambesLourdes.toInt()}/5 Jambes lourdes',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyMedium!
+                                          .copyWith(
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .onSecondaryContainer,
+                                          ),
+                                    ),
+                                    Text(
+                                      _cycles.get(DateTime(daySelected.year, daySelected.month, daySelected.day).toString()) == null ? 'Libido' : '${_cycles.get(DateTime(daySelected.year, daySelected.month, daySelected.day).toString())!.libido.toInt()}/5 Libido',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyMedium!
+                                          .copyWith(
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .onSecondaryContainer,
+                                          ),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ],
                           ),
