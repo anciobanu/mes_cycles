@@ -216,7 +216,19 @@ class _CalendarState extends State<Calendar> {
                             ],
                           ),
                         ),
-                        const SizedBox(height: 16),
+                        const SizedBox(height: 8),
+                        Text(
+                                      _cycles.get(DateTime(daySelected.year, daySelected.month, daySelected.day).toString()) == null ? '' : '${_cycles.get(DateTime(daySelected.year, daySelected.month, daySelected.day).toString())!.commentaires}',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyMedium!
+                                          .copyWith(
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .onSecondaryContainer,
+                                          ),
+                                    ),
+                        const SizedBox(height: 8),
                         Center(
                           child: OutlinedButton.icon(
                             label: Text('Modifier',
