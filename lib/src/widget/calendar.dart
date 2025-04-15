@@ -65,20 +65,20 @@ class _CalendarState extends State<Calendar> {
                       headerStyle: HeaderStyle(
                         formatButtonVisible: false,
                         titleCentered: true,
-                        titleTextStyle: Theme.of(context).textTheme.bodyLarge!.copyWith(color:Theme.of(context).colorScheme.onBackground),
+                        titleTextStyle: Theme.of(context).textTheme.bodyLarge!.copyWith(color:Theme.of(context).colorScheme.onSurface),
                       ),
                       calendarStyle: CalendarStyle(
-                        rangeHighlightColor: Theme.of(context).colorScheme.onBackground,
+                        rangeHighlightColor: Theme.of(context).colorScheme.onSurface,
                         todayTextStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(color: Theme.of(context).colorScheme.onSecondaryContainer),
                         todayDecoration: BoxDecoration(color: Theme.of(context).colorScheme.secondaryContainer, shape: BoxShape.circle),
                         selectedTextStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(color: Theme.of(context).colorScheme.onSecondaryContainer),
                         selectedDecoration: BoxDecoration(color: Theme.of(context).colorScheme.secondaryContainer, shape: BoxShape.circle),
-                        weekendTextStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(color: Theme.of(context).colorScheme.onBackground),
-                        defaultTextStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(color: Theme.of(context).colorScheme.onBackground),
+                        weekendTextStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(color: Theme.of(context).colorScheme.onSurface),
+                        defaultTextStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(color: Theme.of(context).colorScheme.onSurface),
                       ),
                       daysOfWeekStyle: DaysOfWeekStyle(
-                        weekdayStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(color: Theme.of(context).colorScheme.onBackground),
-                        weekendStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(color: Theme.of(context).colorScheme.onBackground),
+                        weekdayStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(color: Theme.of(context).colorScheme.onSurface),
+                        weekendStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(color: Theme.of(context).colorScheme.onSurface),
                       ),
                       onDaySelected: (selectedDay, focusedDay) {
                         setState(() {
@@ -100,7 +100,7 @@ class _CalendarState extends State<Calendar> {
                               return Center(
                                 child: Text(day.day.toString(),
                                   style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                                          color: Theme.of(context).colorScheme.onBackground,
+                                          color: Theme.of(context).colorScheme.onSurface,
                                           fontWeight: FontWeight.bold)),
                             );
                             }
@@ -133,7 +133,7 @@ class _CalendarState extends State<Calendar> {
                               child: Center(
                                 child: Text(day.day.toString(),
                                     style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                                            color: Theme.of(context).colorScheme.onBackground,
+                                            color: Theme.of(context).colorScheme.onSurface,
                                             fontWeight: FontWeight.bold)),
                               ),
                             );
@@ -148,7 +148,7 @@ class _CalendarState extends State<Calendar> {
                           child: Center(
                             child: Text(day.day.toString(),
                                 style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                                        color: Theme.of(context).colorScheme.onBackground)),
+                                        color: Theme.of(context).colorScheme.onSurface)),
                           ),
                         );
                       },

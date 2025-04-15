@@ -11,10 +11,10 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
-  bloc: ^8.0.0
-  flutter_bloc: ^8.0.0
-  hydrated_bloc: ^9.1.4
-  flutter_launcher_icons: ^0.13.1
+  bloc: ^9.0.0
+  flutter_bloc: ^9.1.0
+  hydrated_bloc: ^10.0.0
+  flutter_launcher_icons: ^0.14.3
   cupertino_icons: ^1.0.2
   google_fonts: ^6.2.1
   path_provider: ^2.1.2
@@ -29,7 +29,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^4.0.0
+  flutter_lints: ^5.0.0
 
 flutter:
   uses-material-design: true

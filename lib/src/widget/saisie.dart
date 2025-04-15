@@ -82,7 +82,7 @@ class _SaisieState extends State<Saisie> {
   @override
   Widget build(BuildContext context) {
     return Dialog.fullscreen(
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       //surfaceTintColor: Theme.of(context).colorScheme.background,
       child: Padding(
           padding: const EdgeInsets.all(16),
