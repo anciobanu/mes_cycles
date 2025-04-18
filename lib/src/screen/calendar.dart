@@ -190,6 +190,7 @@ class _CalendarState extends State<Calendar> {
                     ),
                     const SizedBox(height: 16,),
                     MaJournee(cycles: _cycles, daySelected: daySelected,),
+                    const SizedBox(height: 25),
                   ]));
         });
   }

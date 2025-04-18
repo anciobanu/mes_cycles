@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 
 import 'package:mes_cycles/src/model/journee.dart';
-import 'package:mes_cycles/src/widget/calendar.dart';
-import 'package:mes_cycles/src/widget/saisie.dart';
-import 'package:mes_cycles/src/widget/stats.dart';
+import 'package:mes_cycles/src/screen/calendar.dart';
+import 'package:mes_cycles/src/screen/saisie.dart';
+import 'package:mes_cycles/src/screen/stats.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -107,7 +107,9 @@ class _HomeState extends State<Home> {
       floatingActionButton: FloatingActionButton(
           onPressed: _addToday,
           shape: const CircleBorder(),
-          child: const Icon(Icons.add),
+          backgroundColor: Theme.of(context).colorScheme.primary,
+          foregroundColor: Theme.of(context).colorScheme.primary,
+          child: Icon(Icons.add, color: Theme.of(context).colorScheme.onPrimary,),
       ),
     );
   }

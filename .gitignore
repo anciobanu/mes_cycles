@@ -41,3 +41,19 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+#ajouts perso
+*.txt
+*.json
+*.ninja
+*.cmake
+*.o
+*.c
+*.cpp
+*.bin
+*.properties
+*.check_cache
+*.swift
+*.xcscheme
+android/
+macos/

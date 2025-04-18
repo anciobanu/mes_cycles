@@ -116,6 +116,21 @@ class _SaisieState extends State<Saisie> {
                           textAlign: TextAlign.left,
                           style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: Theme.of(context).colorScheme.outline)),
                       SaisieSlider(saveValeur: _saveFlux, currentSliderValue: flux,),
+
+                      Text('Forme (1 fatigue - 5 la pêche) :',
+                          textAlign: TextAlign.left,
+                          style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: Theme.of(context).colorScheme.outline)),
+                      SaisieSlider(saveValeur: _saveForme, currentSliderValue: forme,),
+
+                      Text('Stress (1 Doc Gynéco - 5 Frodon) :',
+                          textAlign: TextAlign.left,
+                          style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: Theme.of(context).colorScheme.outline)),
+                      SaisieSlider(saveValeur: _saveStress, currentSliderValue: stress,),
+                      
+                      Text('Libido (1 none - 5 fatale) :',
+                          textAlign: TextAlign.left,
+                          style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: Theme.of(context).colorScheme.outline)),
+                      SaisieSlider(saveValeur: _saveLibido, currentSliderValue: libido,),
                       
                       Text('Transit (1 diarrhée - 5 constipation) :',
                           textAlign: TextAlign.left,
@@ -136,21 +151,6 @@ class _SaisieState extends State<Saisie> {
                           textAlign: TextAlign.left,
                           style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: Theme.of(context).colorScheme.outline)),
                       SaisieSlider(saveValeur: _saveJambes, currentSliderValue: jambes,),
-
-                      Text('Forme (1 fatigue - 5 la pêche) :',
-                          textAlign: TextAlign.left,
-                          style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: Theme.of(context).colorScheme.outline)),
-                      SaisieSlider(saveValeur: _saveForme, currentSliderValue: forme,),
-
-                      Text('Libido (1 none - 5 fatale) :',
-                          textAlign: TextAlign.left,
-                          style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: Theme.of(context).colorScheme.outline)),
-                      SaisieSlider(saveValeur: _saveLibido, currentSliderValue: libido,),
-
-                      Text('Stress (1 Doc Gynéco - 5 Frodon) :',
-                          textAlign: TextAlign.left,
-                          style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: Theme.of(context).colorScheme.outline)),
-                      SaisieSlider(saveValeur: _saveStress, currentSliderValue: stress,),
 
                       Text('Commentaires :',
                           textAlign: TextAlign.left,
