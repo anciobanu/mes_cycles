@@ -188,7 +188,7 @@ class _CalendarState extends State<Calendar> {
                           }
                       ),
                     ),
-                    const SizedBox(height: 16,),
+                    const SizedBox(height: 8,),
                     MaJournee(cycles: _cycles, daySelected: daySelected,),
                     const SizedBox(height: 25),
                   ]));

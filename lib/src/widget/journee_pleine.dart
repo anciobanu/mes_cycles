@@ -19,14 +19,12 @@ class JourneePleine extends StatelessWidget {
     final String dayKey = DateTime(daySelected.year, daySelected.month, daySelected.day).toString();
     return Column(
       children: [
-        Expanded(
-          flex: 2,
+        IntrinsicHeight(
           child: Row(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Expanded(
-                flex: 2,
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
                       padding: const EdgeInsets.fromLTRB(1, 1, 1, 3),
@@ -54,12 +52,11 @@ class JourneePleine extends StatelessWidget {
                 ),
               ),
               VerticalDivider(
-                  thickness: 1,
-                  color: Theme.of(context).colorScheme.onSecondaryContainer),
+                width: 5,
+                thickness: 1,
+                color: Theme.of(context).colorScheme.onSecondaryContainer),
               Expanded(
-                flex: 2,
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
                       padding: const EdgeInsets.fromLTRB(1, 1, 1, 3),
@@ -93,17 +90,22 @@ class JourneePleine extends StatelessWidget {
         // 2eme ligne pour les commentaires
         const SizedBox(height: 8),
         Expanded(
-            flex: 2,
-            child: Row(
-              children: [
-                Text(
-                  '${cycles.get(dayKey)!.commentaires}',
-                  textAlign: TextAlign.left,
-                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                        color: Theme.of(context).colorScheme.onSecondaryContainer,
-                      ),
+            child: Container(
+              alignment: Alignment.centerLeft,
+              child:
+                Scrollbar(
+                  thumbVisibility: true,
+                  child: SingleChildScrollView(
+                    child: Text(
+                      '${cycles.get(dayKey)!.commentaires}',
+                      textAlign: TextAlign.left,
+                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                            color: Theme.of(context).colorScheme.onSecondaryContainer,),
+                      softWrap: true,
+                      overflow: TextOverflow.clip,
+                    ),
+                  ),
                 ),
-              ],
             )),
         const SizedBox(height: 8),
 
